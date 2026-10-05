@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outfit | Shop - Trendy Fashion</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section id="header">
+        <a href="index.html"><img src="img/logo.png" class="logo" alt="Outfit Logo"></a> 
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="page-header">
+        <h2>#stayhome</h2>
+        <p>Save more with coupons & up to 70% off!</p>
+    </section>
+
+
+    <section id="product1" class="section-p1">
+        <div class="pro-container" id="product-list">
+            <!-- JavaScript ekhane products dynamically render korbe -->
+        </div>
+    </section>
+
+    <!-- Pagination Buttons -->
+    <section id="pagination" class="section-p1">
+        <button onclick="changePage(1)" class="page-btn active" id="btn-1">1</button>
+        <button onclick="changePage(2)" class="page-btn" id="btn-2">2</button>
+        <button onclick="changePage(3)" class="page-btn" id="btn-3">3</button>
+        <button onclick="changePage(4)" class="page-btn" id="btn-4">4</button>
+        <button onclick="nextPage()" class="page-btn"><i class="fas fa-long-arrow-alt-right"></i></button>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h2>Sign Up For Newsletters</h2>
+            <p>Get E-mail updates about our latest shop and <span>special offers.</span></p>
+        </div>
+        <div class="form">
+            <input type="email" placeholder="Your email address" required>
+            <button class="normal">Sign Up</button>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="img/logo.png" alt="Cara Logo">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong> Habra, North 24 Parganas</p>
+            <p><strong>Phone: </strong> +91 9123668346</p>
+            <p><strong>Hours: </strong> 10:00 - 18:00, Mon - Sat</p>
+
+            <div class="follow">
+                <h4>Follow Us</h4>
+                <div class="icon">
+                    <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="img/pay/app.jpg" alt="App Store">
+                <img src="img/pay/play.jpg" alt="Google Play">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img class="pay-gateway" src="img/pay/pay.png" alt="Payment Gateways">
+        </div>
+
+        <div class="copyright">
+            <p>© 2026, Cara eCommerce - Deployed by <span>Tojon Das</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Collection Data (Page 1, 2, 3, 4 er product set)
+        const collections = {
+            1: [
+                { img: 'img/products/f1.jpg', brand: 'Adidas', title: 'Cartoon Astronaut T-Shirt', price: '$78' },
+                { img: 'img/products/f2.jpg', brand: 'Nike', title: 'Streetwear Floral Shirt', price: '$85' },
+                { img: 'img/products/f3.jpg', brand: 'Puma', title: 'Vintage Oversized Tee', price: '$65' },
+                { img: 'img/products/f4.jpg', brand: 'Supreme', title: 'Urban Graphic Hoodie', price: '$120' }
+            ],
+            2: [
+                { img: 'img/products/f5.jpg', brand: 'Off-White', title: 'Denim Oversized Jacket', price: '$150' },
+                { img: 'img/products/f6.jpg', brand: 'Adidas', title: 'Cargo Streetwear Pants', price: '$90' },
+                { img: 'img/products/f7.jpg', brand: 'Zara', title: 'Casual Summer Shorts', price: '$45' },
+                { img: 'img/products/f8.jpg', brand: 'Nike', title: 'Dunk High Top Sneakers', price: '$130' }
+            ],
+            3: [
+                { img: 'img/products/n1.jpg', brand: 'Balenciaga', title: 'Black Acid Wash Tee', price: '$110' },
+                { img: 'img/products/n2.jpg', brand: 'Puma', title: 'Sports Track Jacket', price: '$95' },
+                { img: 'img/products/n3.jpg', brand: 'Adidas', title: 'Retro Windbreaker', price: '$105' },
+                { img: 'img/products/n4.jpg', brand: 'Supreme', title: 'Beanie & Scarf Set', price: '$55' }
+            ],
+            4: [
+                { img: 'img/products/n5.jpg', brand: 'Nike', title: 'Tech Fleece Joggers', price: '$115' },
+                { img: 'img/products/n6.jpg', brand: 'Zara', title: 'Linen Casual Shirt', price: '$60' },
+                { img: 'img/products/n7.jpg', brand: 'Adidas', title: 'Bucket Hat Drip', price: '$35' },
+                { img: 'img/products/n8.jpg', brand: 'Off-White', title: 'Leather Crossbody Bag', price: '$210' }
+            ]
+        };
+
+        let currentPage = 1;
+
+        function renderProducts(page) {
+            const productContainer = document.getElementById('product-list');
+            productContainer.innerHTML = ''; // Clear existing 
+            const products = collections[page];
+            
+            products.forEach(item => {
+                const productData = encodeURIComponent(JSON.stringify(item));
+                
+                const productHTML = `
+                    <div class="pro" onclick="viewProduct('${productData}')" style="cursor: pointer;">
+                        <img src="${item.img}" alt="${item.title}">
+                        <div class="des">
+                            <span>${item.brand}</span>
+                            <h5>${item.title}</h5>
+                            <div class="star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4>${item.price}</h4>
+                        </div>
+                        <!-- event.stopPropagation() দেওয়া হয়েছে যাতে কার্টে ক্লিক করলে প্রোডাক্ট পেজে না যায় -->
+                        <a href="#" onclick="event.stopPropagation();"><i class="fal fa-shopping-cart cart"></i></a>
+                    </div>
+                `;
+                productContainer.innerHTML += productHTML;
+            });
+
+            document.querySelectorAll('.page-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById(`btn-${page}`);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        function viewProduct(encodedProduct) {
+            const product = JSON.parse(decodeURIComponent(encodedProduct));
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+            window.location.href = 'sproduct.html';
+        }
+
+        // Change Page Function
+        function changePage(page) {
+            currentPage = page;
+            renderProducts(currentPage);
+        }
+
+        function nextPage() {
+            if (currentPage < 4) {
+                currentPage++;
+            } else {
+                currentPage = 1;
+            }
+            renderProducts(currentPage);
+        }
+        
+        renderProducts(1);
+    </script>
+    <script src="script.js"></script>
+</body>
+<script>
+    function quickAddToCart(encodedProduct) {
+        // Data decode kore JS object e kora holo
+        const product = JSON.parse(decodeURIComponent(encodedProduct));
+        let cart = JSON.parse(localStorage.getItem('outfitCart')) || [];
+        
+        // Cart array te product push kora holo
+        cart.push({
+            img: product.img || product.image, // tomar property name onujayi
+            title: product.title,
+            price: product.price,
+            quantity: 1
+        });
+        
+        // Local storage e save kora holo
+        localStorage.setItem('outfitCart', JSON.stringify(cart));
+        
+        // Ekta chotto alert dekhano
+        alert(product.title + " has been added to your cart!");
+    }
+</script>
+</html>

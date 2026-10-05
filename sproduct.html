@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Outfit</title>
+    <link rel="stylesheet" href="[https://pro.fontawesome.com/releases/v5.10.0/css/all.css](https://pro.fontawesome.com/releases/v5.10.0/css/all.css)" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="header">
+        <a href="index.html"><img src="img/logo.png" class="logo" alt="Outfit Logo"></a> 
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+            </ul>
+        </div>
+    </section>
+    <section id="prodetails" class="section-p1">
+        <div class="single-pro-image">
+            <img src="img/products/f1.jpg" width="100%" id="MainImg" alt="">
+        </div>
+
+        <div class="single-pro-details">
+            <a href="shop.html" class="close-icon" title="Back to Shop"><i class="fas fa-times"></i></a>
+
+            <h6 id="proBrand">Home / Brand</h6>
+            <h4 id="proTitle">Men's Fashion T Shirt</h4>
+            <h2 id="proPrice">$139.00</h2>
+            
+            <select id="proSize">
+                <option value="Select Size">Select Size</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+                <option value="Small">Small</option>
+                <option value="Large">Large</option>
+            </select>
+            
+            <input type="number" id="proQty" value="1" min="1">
+            <button class="normal" onclick="addToCart()">Add To Cart</button>
+            
+            <h4>Product Details</h4>
+            <span>Elevate your style with this premium quality apparel. Designed for maximum comfort and durability, it features a modern fit that looks great on everyone. Perfect for casual outings, streetwear fashion, or everyday wear. Wash in cold water to maintain the premium fabric texture.</span>
+        </div>
+    </section>
+
+    <script>
+    
+        const productData = JSON.parse(localStorage.getItem('selectedProduct'));
+
+        if (productData) {
+            document.getElementById('MainImg').src = productData.img;
+            document.getElementById('proBrand').innerText = `Home / ${productData.brand}`;
+            document.getElementById('proTitle').innerText = productData.title;
+            document.getElementById('proPrice').innerText = productData.price;
+        } else {
+        
+            window.location.href = 'shop.html';
+        }
+
+        function addToCart() {
+            const size = document.getElementById('proSize').value;
+            const qty = document.getElementById('proQty').value;
+
+            if (size === "Select Size") {
+                alert("Please select a size first!");
+                return;
+            }
+
+            const cartItem = {
+                img: productData.img,
+                title: productData.title,
+                price: productData.price,
+                size: size,
+                quantity: qty
+            };
+
+            let cart = JSON.parse(localStorage.getItem('outfitCart')) || [];
+            cart.push(cartItem);
+            localStorage.setItem('outfitCart', JSON.stringify(cart));
+
+            alert(`${productData.title} added to cart successfully!`);
+            window.location.href = 'cart.html'; 
+        }
+    </script>
+    
+<footer class="section-p1">
+  <!-- Column 1: Logo & Contact -->
+  <div class="col">
+  <img class="logo" src="img/logo.png" alt="Cara Logo">
+  <h4>Contact</h4>
+  <p><strong>Address: </strong> Habra, North 24 Parganas</p>
+  <p><strong>Phone: </strong> +91 9123668346</p>
+  <p><strong>Hours: </strong> 10:00 - 18:00, Mon - Sat</p>
+
+  <div class="follow">
+    <h4>Follow Us</h4>
+    <div class="icon">
+      <!-- 1. GitHub -->
+      <a href="https://github.com/your-username" target="_blank" title="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+
+      <!-- 2. LinkedIn -->
+      <a href="https://linkedin.com/in/your-username" target="_blank" title="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+
+      <!-- 3. Instagram (ba Twitter/X) -->
+      <a href="https://instagram.com/your-username" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </div>
+</div>
+  <!-- Column 2: About -->
+  <div class="col">
+    <h4>About</h4>
+    <a href="#">About Us</a>
+    <a href="#">Delivery Information</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms & Conditions</a>
+    <a href="#">Contact Us</a>
+  </div>
+
+  <!-- Column 3: My Account -->
+  <div class="col">
+    <h4>My Account</h4>
+    <a href="#">Sign In</a>
+    <a href="#">View Cart</a>
+    <a href="#">My Wishlist</a>
+    <a href="#">Track My Order</a>
+    <a href="#">Help</a>
+  </div>
+
+  <!-- Column 4: Install App & Payment -->
+  <div class="col install">
+    <h4>Install App</h4>
+    <p>From App Store or Google Play</p>
+    <div class="row">
+      <img src="img/pay/app.jpg" alt="App Store">
+      <img src="img/pay/play.jpg" alt="Google Play">
+    </div>
+    <p>Secured Payment Gateways</p>
+    <img class="pay-gateway" src="img/pay/pay.png" alt="Payment Gateways">
+  </div>
+
+  <!-- Copyright & Credits Footer Bottom -->
+  <div class="copyright">
+    <p>© 2026, Cara eCommerce - Deployed by <span>Tojon Das</span></p>
+  </div>
+</footer>
+</body>
+<script>
+    function quickAddToCart(encodedProduct) {
+        // Data decode kore JS object e kora holo
+        const product = JSON.parse(decodeURIComponent(encodedProduct));
+        let cart = JSON.parse(localStorage.getItem('outfitCart')) || [];
+        
+        // Cart array te product push kora holo
+        cart.push({
+            img: product.img || product.image, // tomar property name onujayi
+            title: product.title,
+            price: product.price,
+            quantity: 1
+        });
+        
+        // Local storage e save kora holo
+        localStorage.setItem('outfitCart', JSON.stringify(cart));
+        
+        // Ekta chotto alert dekhano
+        alert(product.title + " has been added to your cart!");
+    }
+</script>
+</html>

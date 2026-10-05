@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outfit | Shopping Cart</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="header">
+        <a href="index.html"><img src="img/logo.png" class="logo" alt="Outfit Logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a class="active" href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="page-header" class="about-header">
+        <h2>#cart</h2>
+        <p>Add your coupon code & SAVE upto 70%!</p>
+    </section>
+
+    <section id="cart" class="section-p1">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td>REMOVE</td>
+                    <td>IMAGE</td>
+                    <td>PRODUCT</td>
+                    <td>PRICE</td>
+                    <td>QUANTITY</td>
+                    <td>SUBTOTAL</td>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- JS theke dynamic items asbe -->
+            </tbody>
+        </table>
+    </section>
+
+    <section id="cart-add" class="section-p1">
+        <div id="coupon">
+            <h3>Apply Coupon</h3>
+            <div>
+                <input type="text" placeholder="Enter Your Coupon">
+                <button class="normal">Apply</button>
+            </div>
+        </div>
+
+        <div id="subtotal">
+            <h3>Cart Totals</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td id="cart-subtotal-price">$0.00</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong id="cart-total-price">$0.00</strong></td>
+                </tr>
+            </table>
+            <button class="normal" onclick="placeOrder()">Proceed to checkout</button>
+        </div>
+    </section>
+
+    <footer class="section-p1">
+  <!-- Column 1: Logo & Contact -->
+  <div class="col">
+  <img class="logo" src="img/logo.png" alt="Cara Logo">
+  <h4>Contact</h4>
+  <p><strong>Address: </strong> Habra, North 24 Parganas</p>
+  <p><strong>Phone: </strong> +91 9123668346</p>
+  <p><strong>Hours: </strong> 10:00 - 18:00, Mon - Sat</p>
+
+  <div class="follow">
+    <h4>Follow Us</h4>
+    <div class="icon">
+      <!-- 1. GitHub -->
+      <a href="https://github.com/your-username" target="_blank" title="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+
+      <!-- 2. LinkedIn -->
+      <a href="https://linkedin.com/in/your-username" target="_blank" title="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+
+      <!-- 3. Instagram (ba Twitter/X) -->
+      <a href="https://instagram.com/your-username" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </div>
+</div>
+  <!-- Column 2: About -->
+  <div class="col">
+    <h4>About</h4>
+    <a href="#">About Us</a>
+    <a href="#">Delivery Information</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms & Conditions</a>
+    <a href="#">Contact Us</a>
+  </div>
+
+  <div class="col">
+    <h4>My Account</h4>
+    <a href="#">Sign In</a>
+    <a href="#">View Cart</a>
+    <a href="#">My Wishlist</a>
+    <a href="#">Track My Order</a>
+    <a href="#">Help</a>
+  </div>
+  <div class="col install">
+    <h4>Install App</h4>
+    <p>From App Store or Google Play</p>
+    <div class="row">
+      <img src="img/pay/app.jpg" alt="App Store">
+      <img src="img/pay/play.jpg" alt="Google Play">
+    </div>
+    <p>Secured Payment Gateways</p>
+    <img class="pay-gateway" src="img/pay/pay.png" alt="Payment Gateways">
+  </div>
+  <div class="copyright">
+    <p>© 2026, Cara eCommerce - Deployed by <span>Tojon Das</span></p>
+  </div>
+</footer>
+    <div id="order-popup" class="popup-container">
+        <div class="popup-box">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Order Successful!</h2>
+            <p>Your order has been placed successfully. Thank you for shopping with Outfit!</p>
+            <button onclick="closePopup()" class="normal">Continue Shopping</button>
+        </div>
+    </div>
+
+    <script>
+        function loadCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            let cart = JSON.parse(localStorage.getItem('outfitCart')) || [];
+            
+            cartItemsContainer.innerHTML = '';
+            let totalAmount = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; font-size:18px;">Your cart is empty. <a href="shop.html" style="color:#088178; font-weight:700;">Go shopping!</a></td></tr>';
+                document.getElementById('cart-subtotal-price').innerText = "$0.00";
+                document.getElementById('cart-total-price').innerText = "$0.00";
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                let priceValue = parseFloat(item.price.replace('$', ''));
+                let qtyValue = parseInt(item.quantity);
+                let subtotal = priceValue * qtyValue;
+                totalAmount += subtotal;
+
+                cartItemsContainer.innerHTML += `
+                    <tr>
+                        <td><a href="#" onclick="removeItem(${index})"><i class="far fa-times-circle"></i></a></td>
+                        <td><img src="${item.img}" alt="${item.title}"></td>
+                        <td>${item.title}</td>
+                        <td>${item.price}</td>
+                        <td><input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)"></td>
+                        <td>$${subtotal.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('cart-subtotal-price').innerText = `$${totalAmount.toFixed(2)}`;
+            document.getElementById('cart-total-price').innerText = `$${totalAmount.toFixed(2)}`;
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('outfitCart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('outfitCart', JSON.stringify(cart));
+            loadCart(); 
+        }
+
+        function updateQuantity(index, newQty) {
+            let cart = JSON.parse(localStorage.getItem('outfitCart')) || [];
+            if(newQty >= 1) {
+                cart[index].quantity = newQty;
+                localStorage.setItem('outfitCart', JSON.stringify(cart));
+                loadCart(); 
+            }
+        }
+
+        function placeOrder() {
+            let cart = JSON.parse(localStorage.getItem('outfitCart')) || [];
+            if (cart.length === 0) {
+                alert("Your cart is empty! Please add some products first.");
+                return;
+            }
+            localStorage.removeItem('outfitCart');
+            loadCart(); 
+            document.getElementById('order-popup').classList.add('active');
+        }
+
+        function closePopup() {
+            document.getElementById('order-popup').classList.remove('active');
+            window.location.href = 'shop.html'; 
+        }
+
+        window.onload = loadCart;
+    </script>
+    
+</body>
+</html>

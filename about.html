@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outfit | About Us</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="header">
+        <a href="index.html"><img src="img/logo.png" class="logo" alt="Outfit Logo"></a> 
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a class="active" href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="page-header" class="about-header">
+        <h2>#KnowUs</h2>
+        <p>Discover our journey, our passion, and our vision for fashion.</p>
+    </section>
+
+    <section id="about-head" class="section-p1">
+        <img src="img/about/a6.jpg" alt="About Us Team">
+        <div>
+            <h2>Who We Are?</h2>
+            <p>We believe in delivering the best quality clothing at affordable prices. Our journey started with a simple idea: making fashion accessible to everyone. We carefully select the finest fabrics and follow the latest trends to ensure our customers always step out in style.</p>
+            <abbr title="">Elevate your wardrobe with outfits designed for everyday comfort and premium aesthetics.</abbr>
+            <br><br>
+            <marquee bgcolor="#ccc" loop="-1" scrollamount="5" width="100%">Special Offer: Get up to 70% off on all new arrivals this season. Shop now and upgrade your drip!</marquee>
+        </div>
+    </section>
+
+    <section id="about-features" class="section-p1">
+        <h2>Behind The Brand</h2>
+        <p>A glimpse into our creative process and operations.</p>
+        <div class="fe-container">
+            <div class="fe-box scroll-animate">
+                <img src="img/about/a1.png" alt="Feature 1">
+            </div>
+            <div class="fe-box scroll-animate">
+                <img src="img/about/a2.jpg" alt="Feature 2">
+            </div>
+            <div class="fe-box scroll-animate">
+                <img src="img/about/a3.png" alt="Feature 3">
+            </div>
+            <div class="fe-box scroll-animate">
+                <img src="img/about/a4.png" alt="Feature 4">
+            </div>
+            <div class="fe-box scroll-animate">
+                <img src="img/about/a5.jpg" alt="Feature 5">
+            </div>
+        </div>
+    </section>
+
+    <section id="about-app" class="section-p1">
+        <h1>Download Our <a href="#">App</a> For Exclusive Deals</h1>
+        <div class="video-container scroll-animate">
+            <video autoplay muted loop src="img/about/1.mp4"></video>
+        </div>
+    </section>
+
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h2>Sign Up For Newsletters</h2>
+            <p>Get E-mail updates about our latest shop and <span>special offers.</span></p>
+        </div>
+        <div class="form">
+            <input type="email" placeholder="Your email address" required>
+            <button class="normal">Sign Up</button>
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="img/logo.png" alt="Cara Logo">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong> Habra, North 24 Parganas</p>
+            <p><strong>Phone: </strong> +91 9123668346</p>
+            <p><strong>Hours: </strong> 10:00 - 18:00, Mon - Sat</p>
+            <div class="follow">
+                <h4>Follow Us</h4>
+                <div class="icon">
+                    <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="img/pay/app.jpg" alt="App Store">
+                <img src="img/pay/play.jpg" alt="Google Play">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img class="pay-gateway" src="img/pay/pay.png" alt="Payment Gateways">
+        </div>
+
+        <div class="copyright">
+            <p>© 2026, Cara eCommerce - Deployed by <span>Tojon Das</span></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.scroll-animate');
+            
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(40px)';
+                el.style.transition = 'all 0.6s ease-out';
+            });
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: "0px", threshold: 0.15 });
+
+            animateElements.forEach(el => observer.observe(el));
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
